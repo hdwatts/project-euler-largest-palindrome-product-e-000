@@ -1,30 +1,22 @@
 def largest_palindrome_product
-  num1 = 999
-  num2 = 999
+  max = 999
+  min = 100
   palindrome = -1
-  largest = -1
-  min = 900 #performance saving number, no need to go lower since we just want the largest palindrome
-
-  while num1 > min
-    while num2 > min
-      palindrome = is_palindrome?(num1 * num2)
-      largest = palindrome if palindrome > largest
-      num2 -= 1
+  
+  a = max
+  while a > min
+    b = a
+    while b > min
+      palindrome = ( a * b ) if is_palindrome?(a * b) && ( a * b ) > palindrome
+      b -= 1
     end
-    num2 = 999
-    num1 -= 1
+
+    a -= 1
   end
 
-  largest
+  palindrome
 end
 
 def is_palindrome?(input)
-  forwards = "#{input}"
-  backwards = forwards.reverse
-
-  if backwards == forwards
-    input
-  else
-    -1
-  end
+  input == input.to_s.reverse.to_i
 end
